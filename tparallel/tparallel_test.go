@@ -198,4 +198,21 @@ func TestTwoParallelSequences(t *testing.T) {
 			})
 		},
 	})
+}	
+
+func TestParallelInParallel(t *testing.T) {
+	check := &ConcurrencyChecker{t: t}
+	defer check.Finish(2)
+
+	Run([]func(*T){
+		func(t *T) {
+			check.Sequential(0)
+			t.Parallel()
+			
+			t.Run(func(t *T) {
+				t.Parallel()
+				check.Parallel(1, 1)
+			})
+		},
+	})
 }
