@@ -55,6 +55,7 @@ func TestMapsEqual(t *testing.T) {
 	var i int
 	assert.False(t, genericsum.MapsEqual(map[string]*int{"1": &i, "2": nil}, map[string]*int{"1": &i}))
 	assert.False(t, genericsum.MapsEqual(map[string]*int{"1": &i}, map[string]*int{"1": &i, "2": nil}))
+	assert.False(t, genericsum.MapsEqual(map[string]*int{"1": &i, "2": nil}, map[string]*int{"1": &i, "3": nil}))
 
 	assert.False(t, genericsum.MapsEqual(map[string]*int{"1": new(int)}, map[string]*int{"1": new(int)}),
 		"different pointers")
